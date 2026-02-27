@@ -1,0 +1,359 @@
+---
+export interface Props {
+  stationNumber: number;
+  title: string;
+  description: string;
+  audioFile: string;
+  locationInfo: string;
+  historicalContext: string;
+  significance: string;
+}
+
+const { 
+  stationNumber, 
+  title, 
+  description, 
+  audioFile, 
+  locationInfo, 
+  historicalContext, 
+  significance 
+} = Astro.props;
+
+import Layout from './Layout.astro';
+import AudioPlayer from './AudioPlayer.astro';
+import { getNextStation, getPreviousStation } from '../routes/router.ts';
+
+const nextStation = getNextStation(stationNumber);
+const previousStation = getPreviousStation(stationNumber);
+---
+
+<Layout title={title} description={description}>
+  <main class="station-page">
+    <div class="container">
+      
+      <!-- Station Header -->
+      <header class="station-header">
+        <div class="station-breadcrumb">
+          <a href="/">🏛️ Agora Audioführung</a>
+          <span class="breadcrumb-separator">→</span>
+          <span class="current-station">Station {stationNumber}</span>
+        </div>
+        
+        <div class="station-info">
+          <div class="station-number">Station {stationNumber}</div>
+          <h1 class="station-title">{title.replace(`Station ${stationNumber}: `, '')}</h1>
+          <p class="station-description">{description}</p>
+        </div>
+      </header>
+
+      <!-- Audio Player Section -->
+      <section class="audio-section">
+        <div class="audio-container">
+          <div class="audio-intro">
+            <h2>🎧 Audioführung</h2>
+            <p>Lauschen Sie der historischen Erzählung über diesen bedeutenden Ort</p>
+          </div>
+          
+          <AudioPlayer 
+            audioSrc={audioFile}
+            title={"Station " + stationNumber + ": Audio-Guide"}
+            duration="3:45"
+            className="station-audio-player"
+          />
+        </div>
+      </section>
+
+      <!-- Content Sections -->
+      <div class="content-grid">
+        
+        <!-- Location Info -->
+        <section class="content-card">
+          <h3>📍 Standort & Lage</h3>
+          <div class="content-text">
+            {locationInfo}
+          </div>
+        </section>
+
+        <!-- Historical Context -->
+        <section class="content-card">
+          <h3>📜 Historischer Kontext</h3>
+          <div class="content-text">
+            {historicalContext}
+          </div>
+        </section>
+
+        <!-- Significance -->
+        <section class="content-card full-width">
+          <h3>⭐ Bedeutung & Wichtigkeit</h3>
+          <div class="content-text">
+            {significance}
+          </div>
+        </section>
+
+      </div>
+
+      <!-- Navigation -->
+      <nav class="station-navigation">
+        <div class="nav-container">
+          {previousStation && (
+            <a href={previousStation.path} class="nav-btn nav-prev">
+              <span class="nav-direction">← Vorherige Station</span>
+              <span class="nav-title">{previousStation.title.replace(`Station ${previousStation.stationNumber}: `, '')}</span>
+            </a>
+          )}
+          
+          <a href="/" class="nav-btn nav-home">
+            <span class="nav-home-icon">🏛️</span>
+            <span class="nav-title">Zurück zur Übersicht</span>
+          </a>
+          
+          {nextStation && (
+            <a href={nextStation.path} class="nav-btn nav-next">
+              <span class="nav-direction">Nächste Station →</span>
+              <span class="nav-title">{nextStation.title.replace(`Station ${nextStation.stationNumber}: `, '')}</span>
+            </a>
+          )}
+        </div>
+      </nav>
+      
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .station-page {
+    padding-top: 2rem;
+    min-height: 100vh;
+  }
+  
+  .station-header {
+    margin-bottom: 3rem;
+  }
+  
+  .station-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .station-breadcrumb a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  
+  .station-breadcrumb a:hover {
+    color: var(--primary-600);
+  }
+  
+  .breadcrumb-separator {
+    color: var(--text-400);
+  }
+  
+  .current-station {
+    color: var(--text-600);
+    font-weight: 500;
+  }
+  
+  .station-info {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .station-number {
+    display: inline-block;
+    background: var(--primary);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  
+  .station-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    color: var(--text-900);
+    margin-bottom: 1rem;
+    line-height: 1.1;
+  }
+  
+  .station-description {
+    font-size: 1.25rem;
+    color: var(--text-600);
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .audio-section {
+    background: var(--background-50);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 3rem;
+  }
+  
+  .audio-intro {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .audio-intro h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-800);
+    margin-bottom: 0.5rem;
+  }
+  
+  .audio-intro p {
+    color: var(--text-600);
+    font-size: 1.1rem;
+  }
+  
+  .content-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+  
+  .content-card {
+    background: var(--background-50);
+    border: 1px solid var(--background-200);
+    border-radius: 16px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+  }
+  
+  .content-card:hover {
+    border-color: var(--primary-300);
+    transform: translateY(-2px);
+  }
+  
+  .content-card.full-width {
+    grid-column: 1 / -1;
+  }
+  
+  .content-card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-800);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .content-text {
+    color: var(--text-600);
+    line-height: 1.7;
+    font-size: 1.05rem;
+  }
+  
+  .station-navigation {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--background-200);
+  }
+  
+  .nav-container {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 1rem;
+    align-items: center;
+  }
+  
+  .nav-btn {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    background: var(--background-50);
+    border: 1px solid var(--background-200);
+  }
+  
+  .nav-btn:hover {
+    background: var(--primary-50);
+    border-color: var(--primary-200);
+    transform: translateY(-1px);
+  }
+  
+  .nav-direction {
+    font-size: 0.9rem;
+    color: var(--primary);
+    font-weight: 600;
+  }
+  
+  .nav-title {
+    color: var(--text-700);
+    font-weight: 500;
+  }
+  
+  .nav-home {
+    justify-self: center;
+    align-items: center;
+    text-align: center;
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+  }
+  
+  .nav-home:hover {
+    background: var(--primary-600);
+    border-color: var(--primary-600);
+  }
+  
+  .nav-home .nav-title {
+    color: white;
+  }
+  
+  .nav-home-icon {
+    font-size: 1.25rem;
+  }
+  
+  .nav-next {
+    justify-self: end;
+    text-align: right;
+  }
+  
+  /* Mobile Anpassungen */
+  @media (max-width: 768px) {
+    .station-page {
+      padding-top: 1rem;
+    }
+    
+    .audio-section {
+      padding: 1.5rem;
+    }
+    
+    .content-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    
+    .nav-container {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+    
+    .nav-btn {
+      padding: 0.75rem 1rem;
+    }
+    
+    .nav-next {
+      justify-self: stretch;
+      text-align: center;
+    }
+    
+    .nav-prev {
+      text-align: center;
+    }
+  }
+</style>

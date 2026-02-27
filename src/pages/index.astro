@@ -1,0 +1,182 @@
+---
+import Layout from "../components/Layout.astro";
+import "../styles/agora.css";
+import { agoraStations } from "../routes/router.ts";
+---
+
+<Layout
+  title="Agora Audioführung | Antikes Griechenland"
+  description="Entdecke die antike Agora von Athen mit unserer interaktiven Audioführung. 15 Stationen führen dich durch die Geschichte des politischen und wirtschaftlichen Zentrums des antiken Griechenlands."
+>
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container hero-content">
+      <div class="hero-text">
+        <span class="hero-badge">📚 Schulprojekt</span>
+        <h1 class="hero-title">
+          Agora Audioführung
+          <span class="hero-subtitle">Antikes Griechenland</span>
+        </h1>
+        <p class="hero-description">
+          Begib dich auf eine faszinierende Reise durch die antike Agora von
+          Athen. Entdecke 15 bedeutende Stationen und erfahre durch authentische
+          Audiokommentare alles über das politische und wirtschaftliche Zentrum
+          des antiken Griechenlands.
+        </p>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-number">15</span>
+            <span class="stat-label">Audio-Stationen</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">~45</span>
+            <span class="stat-label">Minuten</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Kostenfrei</span>
+          </div>
+        </div>
+        <a href="#stationen" class="hero-cta"> 🎧 Audioführung starten </a>
+      </div>
+      <div class="hero-visual">
+        <div class="agora-illustration">
+          <div class="ancient-column"></div>
+          <div class="ancient-column"></div>
+          <div class="ancient-column"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- School Project Notice -->
+  <section class="school-notice">
+    <div class="container">
+      <div class="notice-content">
+        <h3>📖 Hinweis zum Schulprojekt</h3>
+        <p>
+          Diese Audioführung wurde im Rahmen eines Schulprojekts erstellt. Alle
+          Audioinhalte und Beschreibungen dienen ausschließlich Bildungszwecken
+          und vermitteln historisches Wissen über die antike griechische Agora.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stations Grid -->
+  <section id="stationen" class="stations-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Audio-Stationen</h2>
+        <p class="section-description">
+          Wähle eine Station aus und beginne deine Reise durch die Geschichte
+        </p>
+      </div>
+
+      <div class="stations-grid">
+        {
+          agoraStations.map((station) => (
+            <a href={station.path} class="station-card">
+              <div class="station-number">{station.stationNumber}</div>
+              <h3 class="station-name">
+                {station.title.replace(
+                  `Station ${station.stationNumber}: `,
+                  "",
+                )}
+              </h3>
+              <p class="station-description">{station.description}</p>
+              <div class="station-duration">
+                <span>🎵</span>
+                <span>~3:45 Min</span>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+
+      <!-- Quick Start Info -->
+      <div
+        class="quick-start"
+        style="
+        text-align: center; 
+        margin-top: 3rem; 
+        padding: 2rem; 
+        background: var(--primary-50); 
+        border-radius: 16px;
+        border: 1px solid var(--primary-200);
+      "
+      >
+        <h3
+          style="
+          color: var(--primary-700); 
+          margin-bottom: 1rem; 
+          font-size: 1.5rem;
+          font-weight: 700;
+        "
+        >
+          🚀 Schnellstart
+        </h3>
+        <p
+          style="
+          color: var(--text-600); 
+          margin-bottom: 1.5rem;
+          font-size: 1.1rem;
+          line-height: 1.6;
+        "
+        >
+          Beginne mit <strong>Station 1</strong> und folge der chronologischen Reihenfolge
+          für die beste Erfahrung. Jede Station enthält ein 3-4 minütiges Audio und
+          detaillierte Hintergrundinformationen.
+        </p>
+        <a
+          href="/station-1"
+          style="
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+          "
+          class="quick-start-btn"
+        >
+          ▶️ Bei Station 1 beginnen
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .quick-start-btn:hover {
+    background: var(--primary-600) !important;
+    transform: translateY(-1px) !important;
+  }
+</style>
+
+<script>
+  import { themeManager } from "../backend/theme";
+
+  // Initialize theme management
+  const themeToggle = document.getElementById("theme-toggle");
+
+  if (themeToggle) {
+    function updateThemeButton() {
+      const currentTheme = themeManager.getCurrentTheme();
+      themeToggle.textContent = currentTheme === "light" ? "🌙" : "☀️";
+    }
+
+    updateThemeButton();
+
+    themeToggle.addEventListener("click", () => {
+      themeManager.toggleTheme();
+      updateThemeButton();
+    });
+  }
+
+  themeManager.listenToSystemTheme();
+</script>

@@ -1,0 +1,120 @@
+---
+export interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Agora Audioführung - Entdecke das antike Griechenland" } = Astro.props;
+import '../styles/global.css';
+import '../styles/agora.css';
+---
+
+<!DOCTYPE html>
+<html lang="de" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <header class="modern-header">
+      <div class="container header-content">
+        <a href="/" class="logo-container">
+          <div class="logo-placeholder">
+            <span class="logo-text">AGORA</span>
+          </div>
+          <span class="header-title">Audioführung Agora</span>
+        </a>
+        <nav class="header-nav">
+          <a href="/" class="nav-link">Start</a>
+          <a href="/#stationen" class="nav-link">Stationen</a>
+          <button id="theme-toggle" class="theme-toggle">
+            🌙
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer style="
+      background: var(--background-100); 
+      border-top: 1px solid var(--background-200);
+      padding: 3rem 0; 
+      margin-top: 4rem;
+    ">
+      <div class="container" style="text-align: center;">
+        <div style="margin-bottom: 2rem;">
+          <h3 style="
+            color: var(--text-700); 
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+          ">
+            🏛️ Agora Audioführung
+          </h3>
+          <p style="
+            color: var(--text-500);
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+          ">
+            Eine Bildungsreise durch das Herz der antiken athenischen Demokratie. 
+            Entdecke die Geschichte, Politik und Kultur des alten Griechenlands.
+          </p>
+        </div>
+        
+        <div style="
+          border-top: 1px solid var(--background-200);
+          padding-top: 2rem;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          flex-wrap: wrap;
+          gap: 1rem;
+        ">
+          <p style="
+            color: var(--text-400);
+            font-size: 0.9rem;
+            margin: 0;
+          ">
+            © 2026 Agora Audioführung | Schulprojekt
+          </p>
+          
+          <div style="
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+          ">
+            <span style="
+              background: var(--primary-100);
+              color: var(--primary-700);
+              padding: 0.25rem 0.75rem;
+              border-radius: 12px;
+              font-size: 0.75rem;
+              font-weight: 600;
+            ">
+              📚 Bildungszwecke
+            </span>
+            <span style="
+              background: var(--secondary-100);
+              color: var(--secondary-700);
+              padding: 0.25rem 0.75rem;
+              border-radius: 12px;
+              font-size: 0.75rem;
+              font-weight: 600;
+            ">
+              🇬🇷 Antikes Griechenland
+            </span>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
