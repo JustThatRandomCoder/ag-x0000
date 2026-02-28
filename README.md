@@ -1,1 +1,240 @@
-# 🏛️ Agora Audioführung - Antikes Griechenland\n\nEine moderne, interaktive Audioführung durch die antike Agora von Athen. Entdecke 15 historische Stationen mit authentischen Audiokommentaren und detaillierten Hintergrundinformationen.\n\n## 🎯 Features\n\n- **🎧 15 Audio-Stationen** mit historischen Erzählungen\n- **📱 Responsive Design** für Mobile und Desktop\n- **🌙 Light/Dark Mode** mit automatischer System-Erkennung\n- **🎵 Moderne Audio-Player** mit Vor-/Rückspul-Funktion und Progress Bar\n- **🏛️ Historische Inhalte** über das Herz der athenischen Demokratie\n- **📚 Schulprojekt-Integration** mit Bildungsfokus\n\n## 📍 Stationen der Audioführung\n\n### Politische & Administrative Gebäude\n1. **Eingang zur Agora** - Der historische Haupteingang\n6. **Bouleuterion** - Sitzungsstätte des Rates der 500\n7. **Tholos** - Amtssitz der Prytanen der Demokratie\n8. **Metroon** - Staatsarchiv und Aufbewahrungsort der Gesetze\n\n### Religiöse Stätten\n3. **Altar der Zwölf Götter** - Religiöses Zentrum und Nullpunkt Athens\n5. **Tempel des Hephaistos** - Besterhaltener dorischer Tempel\n15. **Kirche der Heiligen Apostel** - Byzantinisches Erbe\n\n### Kulturelle & Bildungseinrichtungen\n2. **Stoa Poikile** - Die berühmte \"Bunte Halle\" mit Gemälden\n4. **Odeion des Agrippa** - Konzertgebäude für 1000 Zuschauer\n13. **Bibliothek des Pantainos** - Zentrum des Wissens\n14. **Stoa des Attalos** - Rekonstruierte Säulenhalle und Museum\n\n### Handels- & Infrastruktur\n9. **Monument der Eponymen Heroen** - Denkmal der Stammesgründer\n10. **Mittlere Stoa** - Handels- und Geschäftszentrum\n11. **Süd-Stoa I** - Administrative Gebäude und Geschäfte\n12. **Südost-Brunnenhaus** - Wasserversorgung der Agora\n\n## 🚀 Technische Details\n\n### Architektur\n`\nsrc/\n├── components/          # Astro-Komponenten\n│   ├── Layout.astro     # Haupt-Layout mit Header/Footer\n│   ├── AudioPlayer.astro # Moderner Audio-Player\n│   └── StationTemplate.astro # Template für Stationen\n├── pages/              # Stationen-Seiten (File-based Routing)\n│   ├── index.astro     # Landing Page\n│   ├── station-1.astro # Eingang zur Agora\n│   ├── station-2.astro # Stoa Poikile\n│   └── ...            # Weitere 13 Stationen\n├── styles/             # CSS-Design-System\n│   ├── global.css      # Basis-Styles & Variablen\n│   └── agora.css       # Agora-spezifische Styles\n├── routes/             # Routing-Konfiguration\n│   └── router.ts       # Alle Stationen-Routen\n└── backend/            # Utilities\n    ├── api.ts          # HTTP-Client\n    └── theme.ts        # Theme-Management\n`\n\n### Audio-System\n- **Format**: MP3/OGG Support mit Fallback\n- **Player**: Moderne Controls (Play/Pause, ±15s, Progress Bar)\n- **Responsive**: Optimiert für Touch-Bedienung\n- **Accessibility**: Keyboard-Navigation unterstützt\n\n### Design-System\n- **CSS-Variablen** für konsistente Farben\n- **Mulish Font** (Google Fonts)\n- **Responsive Grid** für alle Bildschirmgrößen\n- **Smooth Animations** ohne Schatten (2D-Design)\n- **Dark/Light Mode** mit localStorage-Persistierung\n\n## 🛠️ Installation & Development\n\n`bash\n# Repository nutzen\ncd ag-x0000\n\n# Abhängigkeiten installieren\nnpm install\n\n# Development Server starten\nnpm run dev\n# → Öffnet http://localhost:4321\n\n# Production Build\nnpm run build\nnpm run preview\n`\n\n## 🎵 Audio-Dateien hinzufügen\n\n1. **Audio-Dateien** in `public/audios/` platzieren:\n `\n   public/audios/\n   ├── station-01.mp3\n   ├── station-02.mp3\n   └── ...\n   `\n\n2. **Format-Anforderungen**:\n - MP3 oder OGG\n - 3-5 Minuten Länge\n - 128 kbps+ Qualität\n - Deutsche Sprache\n\n## 🏗️ Neue Stationen hinzufügen\n\n1. **Route definieren** in `src/routes/router.ts`\n2. **Seite erstellen** mit `StationTemplate`\n3. **Audio-Datei** hinzufügen\n\n## 📚 Pädagogischer Ansatz\n\n### Lernziele\n- **Geschichtsbewusstsein** für die antike griechische Kultur\n- **Demokratie-Verständnis** durch historische Kontextualisierung\n- **Architektonisches Verständnis** der antiken Baukunst\n- **Kulturelle Bildung** über das Erbe der Antike\n\n### Zielgruppe\n- Schüler ab der 7. Klasse\n- Geschichts- und Kulturinteressierte\n- Athen-Touristen\n- Lehrkräfte für den Geschichtsunterricht\n\n## 📖 Hinweis zum Schulprojekt\n\nDiese Audioführung wurde im Rahmen eines **Schulprojekts** erstellt. Alle Inhalte dienen ausschließlich **Bildungszwecken** und vermitteln historisches Wissen über die antike griechische Agora. Die Website ist als digitales Lernwerkzeug für den Geschichtsunterricht konzipiert.\n\n## 🔗 Technical Stack\n\n- **Framework**: [Astro](https://astro.build) - Modern Static Site Generator\n- **Styling**: CSS Custom Properties + Responsive Design\n- **Font**: [Mulish](https://fonts.google.com/specimen/Mulish) von Google Fonts\n- **Design**: Orientiert an modernen, professionellen Websites\n- **Audio**: Native HTML5 Audio mit Custom Controls\n\n## 📄 Lizenz\n\n© 2026 Agora Audioführung | Schulprojekt für Bildungszwecke\n\n---\n\n**🚀 Bereit für die Zeitreise ins antike Griechenland!** \nStarte mit dem Development-Server: `npm run dev`
+# 🏛️ Agora Audioführung - Digitale Zeitreise ins antike Athen
+
+<div align="center">
+
+![Agora Banner](./public/logo.png)
+
+**Eine interaktive digitale Audioführung durch das Herz der athenischen Demokratie**
+
+[![Bildungsprojekt](https://img.shields.io/badge/Projekt-Bildungszwecke-green.svg)](https://uhland-gymnasium.de)
+[![Technologie](https://img.shields.io/badge/Framework-Astro-FF5D01.svg)](https://astro.build)
+[![Lizenz](https://img.shields.io/badge/Lizenz-Bildung_nur-blue.svg)](#lizenz--copyright)
+[![Griechenland](https://img.shields.io/badge/Fahrt-Griechenland_2026-0066cc.svg)](#über-das-projekt)
+
+</div>
+
+## 🌐 Live Demo
+
+**Erlebe die Audioführung direkt im Browser!**
+
+Die vollständige Anwendung ist online verfügbar und kann sofort ohne Installation getestet werden:
+
+### → [ag.x0000.de](https://ag.x0000.de) ←
+
+_Optimiert für Desktop und Mobile | Alle 15 Audio-Stationen verfügbar_
+
+## 🎯 Über das Projekt
+
+Diese Webapplication wurde speziell für die **Griechenland-Fahrt 2026 des Uhland-Gymnasiums** entwickelt. Sie bietet Schülerinnen und Schülern eine digitale Reise durch die antike Agora von Athen mit 15 Audio-Stationen.
+
+### 🎓 Bildungskontext
+
+- **Entwickelt von**: Julius Grimm
+- **Schule**: Uhland-Gymnasium
+- **Anlass**: Griechenlandfahrt 2026
+
+## 🗺️ Die 15 Stationen der Agora
+
+<details>
+<summary><strong>🏛️ Politische & Administrative Zentren (4 Stationen)</strong></summary>
+
+| Station | Name                     | Beschreibung                                  |
+| ------- | ------------------------ | --------------------------------------------- |
+| **1**   | 🚪 **Eingang zur Agora** | Der historische Hauptzugang zum Herzen Athens |
+| **6**   | 🏛️ **Bouleuterion**      | Versammlungsstätte des Rates der 500          |
+| **7**   | ⭕ **Tholos**            | Amtssitz der demokratischen Prytanen          |
+| **8**   | 📜 **Metroon**           | Staatsarchiv und Gesetzesaufbewahrung         |
+
+</details>
+
+<details>
+<summary><strong>⛪ Religiöse Stätten (3 Stationen)</strong></summary>
+
+| Station | Name                               | Beschreibung                                  |
+| ------- | ---------------------------------- | --------------------------------------------- |
+| **3**   | 🔥 **Altar der Zwölf Götter**      | Religiöser Mittelpunkt und Nullpunkt Athens   |
+| **5**   | 🏗️ **Tempel des Hephaistos**       | Besterhaltener dorischer Tempel Griechenlands |
+| **15**  | ⛪ **Kirche der Heiligen Apostel** | Byzantinisches Erbe in der Antike             |
+
+</details>
+
+<details>
+<summary><strong>🎭 Kulturelle & Bildungseinrichtungen (4 Stationen)</strong></summary>
+
+| Station | Name                            | Beschreibung                                    |
+| ------- | ------------------------------- | ----------------------------------------------- |
+| **2**   | 🎨 **Stoa Poikile**             | Die berühmte "Bunte Halle" mit antiken Gemälden |
+| **4**   | 🎵 **Odeion des Agrippa**       | Konzertgebäude für 1000 Zuschauer               |
+| **13**  | 📚 **Bibliothek des Pantainos** | Antikes Zentrum des Wissens                     |
+| **14**  | 🏛️ **Stoa des Attalos**         | Rekonstruierte Säulenhalle und Museum           |
+
+</details>
+
+<details>
+<summary><strong>🏪 Handel & Infrastruktur (4 Stationen)</strong></summary>
+
+| Station | Name                                | Beschreibung                             |
+| ------- | ----------------------------------- | ---------------------------------------- |
+| **9**   | 🗿 **Monument der Eponymen Heroen** | Denkmal der athenischen Stammesgründer   |
+| **10**  | 🏪 **Mittlere Stoa**                | Handels- und Geschäftszentrum der Antike |
+| **11**  | 🏛️ **Süd-Stoa I**                   | Administrative Gebäude und Geschäfte     |
+| **12**  | ⛲ **Südost-Brunnenhaus**           | Wasserversorgung der Agora               |
+
+</details>
+
+---
+
+## 🚀 Technologie-Stack
+
+### Frontend Technologies
+
+![Astro](https://img.shields.io/badge/Astro-FF5D01?style=for-the-badge&logo=astro&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+
+</div>
+
+### 🏗️ Architektur
+
+```
+🏛️ ag-x0000/
+├── 📁 src/
+│   ├── 🧩 components/          # Wiederverwendbare Astro-Komponenten
+│   │   ├── 🖼️ Layout.astro      # Haupt-Layout mit Navigation
+│   │   ├── 🎵 AudioPlayer.astro # Moderner Audio-Player
+│   │   └── 📄 StationTemplate.astro # Stationen-Template
+│   ├── 📝 pages/              # Astro File-based Routing
+│   │   ├── 🏠 index.astro      # Landing Page mit Übersicht
+│   │   ├── 🚪 station-1.astro  # Eingang zur Agora
+│   │   ├── 🎨 station-2.astro  # Stoa Poikile
+│   │   └── 📍 station-{3-15}.astro # Weitere 13 Stationen
+│   ├── 🎨 styles/             # Design System
+│   │   └── 🌐 global.css      # CSS Custom Properties & Themes
+│   └── 🛣️ routes/             # Routing-Konfiguration
+│       └── 📋 router.ts       # Stationen-Navigation
+├── 📁 public/
+│   ├── 🎵 audios/             # MP3 Audio-Dateien
+│   │   ├── 🎧 station-01.mp3
+│   │   └── 📻 station-{02-15}.mp3
+│   └── 🖼️ logo.png           # Uhland-Gymnasium Logo
+└── 📦 Package Management
+    ├── 📄 package.json        # Dependencies & Scripts
+    ├── ⚙️ astro.config.mjs     # Astro-Konfiguration
+    └── 📝 tsconfig.json       # TypeScript-Setup
+```
+
+### 🔧 Technische Highlights
+
+- **🚀 Astro Framework**: Server-Side Rendering für optimale Performance
+- **🎨 CSS Custom Properties**: Konsistentes Design-System mit Dark/Light Mode
+- **📱 Progressive Enhancement**: Funktioniert auch ohne JavaScript
+- **🎵 Native Audio API**: HTML5 Audio mit benutzerdefinierten Kontrollen
+- **♿ Accessibility**: WCAG-konforme Navigation und Bedienelemente
+- **📐 Responsive Grid**: Mobile-First Design für alle Bildschirmgrößen
+
+---
+
+## 💻 Installation & Development
+
+### Voraussetzungen
+
+- **Node.js** 18+ (LTS empfohlen)
+- **npm** oder **pnpm** Package Manager
+- Moderner Browser (Chrome, Firefox, Safari, Edge)
+
+### 🛠️ Setup
+
+```bash
+# Repository klonen
+git clone https://github.com/your-username/ag-x0000.git
+cd ag-x0000
+
+# Dependencies installieren
+npm install
+# oder: pnpm install
+
+# Development Server starten
+npm run dev
+# 🌐 Öffnet automatisch: http://localhost:4321
+
+# Production Build erstellen
+npm run build
+
+# Production Preview
+npm run preview
+```
+
+### 🔧 Scripts
+
+| Command           | Beschreibung                      |
+| ----------------- | --------------------------------- |
+| `npm run dev`     | Development Server mit Hot Reload |
+| `npm run build`   | Production Build generieren       |
+| `npm run preview` | Production Build lokal testen     |
+| `npm run astro`   | Astro CLI direkt verwenden        |
+
+---
+
+## 🎵 Audio-Management
+
+### 📁 Audio-Datei Struktur
+
+```
+public/audios/
+├── 🎧 station-01.mp3  # Eingang zur Agora
+├── 🎨 station-02.mp3  # Stoa Poikile
+├── 🔥 station-03.mp3  # Altar der Zwölf Götter
+└── 📍 station-{04-15}.mp3  # Weitere Stationen
+```
+
+### 📋 Audio-Spezifikationen
+
+- **Format**: MP3 (primär) mit OGG Fallback
+- **Dauer**: 3-5 Minuten pro Station
+- **Qualität**: Mindestens 128 kbps, empfohlen 320 kbps
+- **Sprache**: Deutsch (Hochdeutsch)
+
+## Nutzungsrechte
+
+**© 2026 Julius Grimm | Uhland-Gymnasium**
+
+| Berechtigung            | Status      | Details                            |
+| ----------------------- | ----------- | ---------------------------------- |
+| 📖 Bildungszweck        | ✅ Erlaubt  | Nur zur Ansicht und zum Lernen     |
+| 💻 Code-Verwendung      | ❌ Verboten | Keine Weiterverwendung des Codes   |
+| 🔄 Weiterentwicklung    | ❌ Verboten | Nur durch Julius Grimm autorisiert |
+| 📋 Kopieren/Forken      | ❌ Verboten | Keine Kopien oder Forks erlaubt    |
+| 🏢 Kommerzielle Nutzung | ❌ Verboten | Nicht für kommerzielle Zwecke      |
+
+---
+
+## 👨‍💻 Project Developer
+
+<div align="center">
+
+### Julius Grimm - Full-Stack Developer & UI/UX Designer
+
+[![Portfolio](https://img.shields.io/badge/🌐_Website-juliusgrimm.dev-666799?style=for-the-badge&logoColor=white)](https://juliusgrimm.dev)
+[![Email](https://img.shields.io/badge/📧_Email-Contact-0066cc?style=for-the-badge&logoColor=white)](mailto:me@juliusgrimm.dev)
+[![GitHub](https://img.shields.io/badge/🔗_GitHub-Repository-333333?style=for-the-badge&logo=github&logoColor=white)](https://github.com/justthatrandomcoder)
+
+**🏫 Entwickelt für das Uhland-Gymnasium | 🇬🇷 Griechenland-Fahrt 2026**
+
+</div>
+
+---
+
+<div align="center">
+
+## 🏛️ Bereit für die Zeitreise ins antike Athen?
+
+[![Zur Audioführung](https://img.shields.io/badge/🎧_Audioführung_starten-666799?style=for-the-badge&logoColor=white)](https://ag.x0000.de)
+
+**Entwickelt mit ❤️ für die Griechenland-Fahrt 2026**
+
+---
+
+_Die Demokratie wurde in Athen geboren - erlebe ihre Geburtsstätte!_ 🏛️✨
+
+</div>

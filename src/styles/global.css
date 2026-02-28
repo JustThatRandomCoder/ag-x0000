@@ -775,7 +775,7 @@ input:checked+.slider::after {
 }
 
 :root[data-theme="dark"] .quick-guide {
-    background: var(--background-50);
+    background: var(--background-100);
 }
 
 .quick-guide h3 {
