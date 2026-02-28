@@ -1,6 +1,6 @@
 ---
 import Layout from "../components/Layout.astro";
-import "../styles/agora.css";
+import "../styles/agora-new.css";
 import { agoraStations } from "../routes/router.ts";
 ---
 
@@ -10,54 +10,72 @@ import { agoraStations } from "../routes/router.ts";
 >
   <!-- Hero Section -->
   <section class="hero-section">
-    <div class="container hero-content">
-      <div class="hero-text">
-        <span class="hero-badge">📚 Schulprojekt</span>
-        <h1 class="hero-title">
-          Agora Audioführung
-          <span class="hero-subtitle">Antikes Griechenland</span>
-        </h1>
-        <p class="hero-description">
-          Begib dich auf eine faszinierende Reise durch die antike Agora von
-          Athen. Entdecke 15 bedeutende Stationen und erfahre durch authentische
-          Audiokommentare alles über das politische und wirtschaftliche Zentrum
-          des antiken Griechenlands.
-        </p>
-        <div class="hero-stats">
-          <div class="stat-item">
-            <span class="stat-number">15</span>
-            <span class="stat-label">Audio-Stationen</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-number">~45</span>
-            <span class="stat-label">Minuten</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-number">100%</span>
-            <span class="stat-label">Kostenfrei</span>
-          </div>
+    <div class="container">
+      <div class="hero-content">
+        <!-- Main Title Block -->
+        <div class="hero-main">
+          <div class="hero-badge">📚 Bildungsprojekt</div>
+          <h1 class="hero-title">Agora Audioführung</h1>
+          <h2 class="hero-subtitle">Antikes Griechenland</h2>
         </div>
-        <a href="#stationen" class="hero-cta"> 🎧 Audioführung starten </a>
-      </div>
-      <div class="hero-visual">
-        <div class="agora-illustration">
-          <div class="ancient-column"></div>
-          <div class="ancient-column"></div>
-          <div class="ancient-column"></div>
+
+        <!-- Description & CTA -->
+        <div class="hero-description">
+          <p>
+            Entdecke die Wiege der Demokratie durch eine immersive Audioführung.
+            15 authentische Stationen führen dich durch das politische und
+            kulturelle Herz des antiken Athens.
+          </p>
+
+          <!-- Important Notice -->
+          <div class="important-note">
+            <div class="accent-bar"></div>
+            <p>
+              Interaktive Zeitreise in die Antike – Perfekt für
+              Geschichtsbegeisterte und Schüler
+            </p>
+          </div>
+
+          <!-- Quick Stats -->
+          <div class="quick-stats">
+            <div class="stat">
+              <span class="stat-number">15</span>
+              <span class="stat-label">Stationen</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">~45</span>
+              <span class="stat-label">Minuten</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">100%</span>
+              <span class="stat-label">Kostenfrei</span>
+            </div>
+          </div>
+
+          <!-- Main CTA -->
+          <div class="cta-section">
+            <a href="/station-1" class="cta-primary">
+              <span class="cta-icon">▶</span>
+              <span class="cta-text">Tour jetzt starten</span>
+            </a>
+            <a href="#stationen" class="cta-secondary">Alle Stationen ansehen</a
+            >
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- School Project Notice -->
-  <section class="school-notice">
+  <!-- Educational Info -->
+  <section class="info-section">
     <div class="container">
-      <div class="notice-content">
-        <h3>📖 Hinweis zum Schulprojekt</h3>
+      <!-- Educational Box -->
+      <div class="info-box">
+        <h3>📖 Bildungsinhalt</h3>
         <p>
-          Diese Audioführung wurde im Rahmen eines Schulprojekts erstellt. Alle
-          Audioinhalte und Beschreibungen dienen ausschließlich Bildungszwecken
-          und vermitteln historisches Wissen über die antike griechische Agora.
+          Diese Audioführung vermittelt historisch authentisches Wissen über die
+          antike griechische Agora und wurde speziell für Bildungszwecke
+          entwickelt.
         </p>
       </div>
     </div>
@@ -68,16 +86,22 @@ import { agoraStations } from "../routes/router.ts";
     <div class="container">
       <div class="section-header">
         <h2 class="section-title">Audio-Stationen</h2>
-        <p class="section-description">
-          Wähle eine Station aus und beginne deine Reise durch die Geschichte
-        </p>
+
+        <!-- Navigation Hint -->
+        <div class="navigation-hint">
+          <div class="accent-bar"></div>
+          <p>Folge der chronologischen Reihenfolge für die beste Erfahrung</p>
+        </div>
       </div>
 
       <div class="stations-grid">
         {
           agoraStations.map((station) => (
             <a href={station.path} class="station-card">
-              <div class="station-number">{station.stationNumber}</div>
+              <div class="station-header">
+                <div class="station-number">{station.stationNumber}</div>
+                <div class="station-duration">~3:45 Min</div>
+              </div>
               <h3 class="station-name">
                 {station.title.replace(
                   `Station ${station.stationNumber}: `,
@@ -85,78 +109,28 @@ import { agoraStations } from "../routes/router.ts";
                 )}
               </h3>
               <p class="station-description">{station.description}</p>
-              <div class="station-duration">
-                <span>🎵</span>
-                <span>~3:45 Min</span>
-              </div>
+              <div class="station-action">Anhören →</div>
             </a>
           ))
         }
       </div>
 
-      <!-- Quick Start Info -->
-      <div
-        class="quick-start"
-        style="
-        text-align: center; 
-        margin-top: 3rem; 
-        padding: 2rem; 
-        background: var(--primary-50); 
-        border-radius: 16px;
-        border: 1px solid var(--primary-200);
-      "
-      >
-        <h3
-          style="
-          color: var(--primary-700); 
-          margin-bottom: 1rem; 
-          font-size: 1.5rem;
-          font-weight: 700;
-        "
-        >
-          🚀 Schnellstart
-        </h3>
-        <p
-          style="
-          color: var(--text-600); 
-          margin-bottom: 1.5rem;
-          font-size: 1.1rem;
-          line-height: 1.6;
-        "
-        >
-          Beginne mit <strong>Station 1</strong> und folge der chronologischen Reihenfolge
-          für die beste Erfahrung. Jede Station enthält ein 3-4 minütiges Audio und
-          detaillierte Hintergrundinformationen.
+      <!-- Quick Start Guide -->
+      <div class="quick-guide">
+        <h3>🚀 Schnellstart</h3>
+        <p>
+          Beginne mit <strong>Station 1</strong> und folge der chronologischen Reihenfolge.
+          Jede Station enthält ein 3-4 minütiges Audio und detaillierte historische
+          Informationen.
         </p>
-        <a
-          href="/station-1"
-          style="
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: var(--primary);
-            color: white;
-            text-decoration: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: all 0.2s ease;
-          "
-          class="quick-start-btn"
-        >
-          ▶️ Bei Station 1 beginnen
-        </a>
+        <div class="guide-actions">
+          <a href="/station-1" class="guide-btn primary">▶ Jetzt beginnen</a>
+          <a href="#stationen" class="guide-btn secondary">Übersicht</a>
+        </div>
       </div>
     </div>
   </section>
 </Layout>
-
-<style>
-  .quick-start-btn:hover {
-    background: var(--primary-600) !important;
-    transform: translateY(-1px) !important;
-  }
-</style>
 
 <script>
   import { themeManager } from "../backend/theme";
