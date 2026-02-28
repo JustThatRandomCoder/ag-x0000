@@ -1,6 +1,6 @@
 ---
 import Layout from "../components/Layout.astro";
-import "../styles/agora-new.css";
+import "../styles/global.css";
 import { agoraStations } from "../routes/router.ts";
 ---
 
@@ -48,7 +48,7 @@ import { agoraStations } from "../routes/router.ts";
             </div>
             <div class="stat">
               <span class="stat-number">100%</span>
-              <span class="stat-label">Kostenfrei</span>
+              <span class="stat-label">Self-made</span>
             </div>
           </div>
 
@@ -131,26 +131,3 @@ import { agoraStations } from "../routes/router.ts";
     </div>
   </section>
 </Layout>
-
-<script>
-  import { themeManager } from "../backend/theme";
-
-  // Initialize theme management
-  const themeToggle = document.getElementById("theme-toggle");
-
-  if (themeToggle) {
-    function updateThemeButton() {
-      const currentTheme = themeManager.getCurrentTheme();
-      themeToggle.textContent = currentTheme === "light" ? "🌙" : "☀️";
-    }
-
-    updateThemeButton();
-
-    themeToggle.addEventListener("click", () => {
-      themeManager.toggleTheme();
-      updateThemeButton();
-    });
-  }
-
-  themeManager.listenToSystemTheme();
-</script>

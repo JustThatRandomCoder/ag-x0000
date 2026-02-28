@@ -9,36 +9,37 @@ const {
   description = "Agora Audioführung - Entdecke das antike Griechenland",
 } = Astro.props;
 import "../styles/global.css";
-import "../styles/agora-new.css";
 ---
 
 <!doctype html>
-<html lang="de" data-theme="dark">
+<html lang="de">
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <link rel="icon" href="/logo.png" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
   <body>
-    <header class="modern-header">
+    <header class="main-header">
       <div class="container">
         <div class="header-content">
           <a href="/" class="logo-container">
-            <div class="logo-symbol">🏗️</div>
-            <div class="logo-text-block">
-              <span class="logo-title">AGORA</span>
-              <span class="logo-subtitle">Audioführung</span>
-            </div>
+            <img src="/logo.png" alt="Agora Logo" class="logo-image" />
+            <span class="header-title">Audioführung Agora</span>
           </a>
           <nav class="header-nav">
             <a href="/" class="nav-link">Start</a>
             <a href="/#stationen" class="nav-link">Stationen</a>
             <a href="/station-1" class="nav-link tour-start">Tour starten</a>
-            <button id="theme-toggle" class="theme-toggle"> 🌙 </button>
+            <div class="theme-slider-container">
+              <label class="theme-slider">
+                <input type="checkbox" id="theme-toggle" />
+                <span class="slider"></span>
+              </label>
+            </div>
           </nav>
         </div>
       </div>
@@ -48,90 +49,26 @@ import "../styles/agora-new.css";
       <slot />
     </main>
 
-    <footer
-      style="
-      background: var(--background-100); 
-      border-top: 1px solid var(--background-200);
-      padding: 3rem 0; 
-      margin-top: 4rem;
-    "
-    >
-      <div class="container" style="text-align: center;">
-        <div style="margin-bottom: 2rem;">
-          <h3
-            style="
-            color: var(--text-700); 
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-          "
-          >
-            🏛️ Agora Audioführung
-          </h3>
-          <p
-            style="
-            color: var(--text-500);
-            line-height: 1.6;
-            max-width: 600px;
-            margin: 0 auto;
-          "
-          >
+    <footer class="site-footer">
+      <div class="footer-container container">
+        <div class="footer-main">
+          <h3 class="footer-title">🏛️ Agora Audioführung</h3>
+          <p class="footer-description">
             Eine Bildungsreise durch das Herz der antiken athenischen
             Demokratie. Entdecke die Geschichte, Politik und Kultur des alten
             Griechenlands.
           </p>
         </div>
 
-        <div
-          style="
-          border-top: 1px solid var(--background-200);
-          padding-top: 2rem;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          flex-wrap: wrap;
-          gap: 1rem;
-        "
-        >
-          <p
-            style="
-            color: var(--text-400);
-            font-size: 0.9rem;
-            margin: 0;
-          "
-          >
-            © 2026 Agora Audioführung | Schulprojekt
+        <div class="footer-bottom">
+          <p class="footer-copyright">
+            © 2026 Julius Grimm; Alle Rechte vorbehalten.
           </p>
 
-          <div
-            style="
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-          "
-          >
-            <span
-              style="
-              background: var(--primary-100);
-              color: var(--primary-700);
-              padding: 0.25rem 0.75rem;
-              border-radius: 12px;
-              font-size: 0.75rem;
-              font-weight: 600;
-            "
-            >
-              📚 Bildungszwecke
-            </span>
-            <span
-              style="
-              background: var(--secondary-100);
-              color: var(--secondary-700);
-              padding: 0.25rem 0.75rem;
-              border-radius: 12px;
-              font-size: 0.75rem;
-              font-weight: 600;
-            "
-            >
+          <div class="footer-badges">
+            <span class="footer-badge">💻 GitHub Repository </span>
+            <span class="footer-badge">📚 Bildungszwecke </span>
+            <span class="footer-badge footer-badge-secondary">
               🇬🇷 Antikes Griechenland
             </span>
           </div>
@@ -140,3 +77,45 @@ import "../styles/agora-new.css";
     </footer>
   </body>
 </html>
+
+<script>
+  // Initialize theme immediately to prevent flash
+  (function () {
+    const savedTheme = localStorage.getItem("theme");
+    const theme = savedTheme || "dark";
+    document.documentElement.setAttribute("data-theme", theme);
+
+    if (!savedTheme) {
+      localStorage.setItem("theme", theme);
+    }
+  })();
+
+  function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute("data-theme");
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+
+    document.documentElement.setAttribute("data-theme", newTheme);
+    localStorage.setItem("theme", newTheme);
+
+    updateThemeSlider();
+  }
+
+  function updateThemeSlider() {
+    const themeToggle = document.getElementById("theme-toggle");
+    const currentTheme = document.documentElement.getAttribute("data-theme");
+
+    if (themeToggle) {
+      themeToggle.checked = currentTheme === "dark";
+    }
+  }
+
+  // Initialize slider and event listener when DOM is ready
+  document.addEventListener("DOMContentLoaded", () => {
+    updateThemeSlider();
+
+    const themeToggle = document.getElementById("theme-toggle");
+    if (themeToggle) {
+      themeToggle.addEventListener("change", toggleTheme);
+    }
+  });
+</script>

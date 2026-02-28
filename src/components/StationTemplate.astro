@@ -5,19 +5,10 @@ export interface Props {
   description: string;
   audioFile: string;
   locationInfo: string;
-  historicalContext: string;
-  significance: string;
 }
 
-const {
-  stationNumber,
-  title,
-  description,
-  audioFile,
-  locationInfo,
-  historicalContext,
-  significance,
-} = Astro.props;
+const { stationNumber, title, description, audioFile, locationInfo } =
+  Astro.props;
 
 import Layout from "./Layout.astro";
 import AudioPlayer from "./AudioPlayer.astro";
@@ -40,7 +31,7 @@ const previousStation = getPreviousStation(stationNumber);
 
         <div class="station-info">
           <div class="station-number">Station {stationNumber}</div>
-          <h1 class="station-title">
+          <h1 class="station-title-left">
             {title.replace(`Station ${stationNumber}: `, "")}
           </h1>
           <p class="station-description">{description}</p>
@@ -67,29 +58,35 @@ const previousStation = getPreviousStation(stationNumber);
         </div>
       </section>
 
-      <!-- Content Sections -->
-      <div class="content-grid">
-        <!-- Location Info -->
-        <section class="content-card">
-          <h3>📍 Standort & Lage</h3>
+      <!-- Content Sections - Simplified Layout -->
+      <div class="content-vertical">
+        <!-- Beschreibung -->
+        <section class="content-section">
+          <h3>📜 Beschreibung</h3>
+          <div class="content-text">
+            {description}
+          </div>
+        </section>
+
+        <!-- Ort -->
+        <section class="content-section">
+          <h3>📍 Ort</h3>
           <div class="content-text">
             {locationInfo}
           </div>
         </section>
 
-        <!-- Historical Context -->
-        <section class="content-card">
-          <h3>📜 Historischer Kontext</h3>
+        <!-- Eckdaten -->
+        <section class="content-section">
+          <h3>⚙️ Eckdaten</h3>
           <div class="content-text">
-            {historicalContext}
-          </div>
-        </section>
-
-        <!-- Significance -->
-        <section class="content-card full-width">
-          <h3>⭐ Bedeutung & Wichtigkeit</h3>
-          <div class="content-text">
-            {significance}
+            <strong>Periode:</strong> 6. Jahrhundert v. Chr. - 6. Jahrhundert n. Chr.<br
+            />
+            <strong>Funktion:</strong>
+            {title.replace(`Station ${stationNumber}: `, "").toLowerCase()}<br
+            />
+            <strong>Erhaltung:</strong> Archäologische Überreste<br />
+            <strong>Bedeutung:</strong> Zentrum der athenischen Demokratie
           </div>
         </section>
       </div>
