@@ -1335,7 +1335,7 @@ input:checked+.slider::after {
    ========================================== */
 @media (max-width: 768px) {
     .station-page {
-        padding-top: 1rem;
+        padding: 1rem 0rem;
     }
 
     .audio-section {
