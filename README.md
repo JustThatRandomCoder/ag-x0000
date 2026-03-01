@@ -2,11 +2,11 @@
 
 <div align="center">
 
-![Agora Banner](./public/logo.png)
+![Agora Banner](./public/logo_white.png)
 
 **Eine interaktive digitale Audioführung durch das Herz der athenischen Demokratie**
 
-[![Bildungsprojekt](https://img.shields.io/badge/Projekt-Bildungszwecke-green.svg)](https://uhland-gymnasium.de)
+[![Bildungsprojekt](https://img.shields.io/badge/Projekt-Bildungszwecke-green.svg)](https://juliusgrimm.dev)
 [![Technologie](https://img.shields.io/badge/Framework-Astro-FF5D01.svg)](https://astro.build)
 [![Lizenz](https://img.shields.io/badge/Lizenz-Bildung-blue.svg)](#lizenz--copyright)
 [![Griechenland](https://img.shields.io/badge/Fahrt-Griechenland_2026-0066cc.svg)](#über-das-projekt)

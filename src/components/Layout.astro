@@ -21,6 +21,16 @@ import "../styles/global.css";
     <link rel="icon" href="/logo.png" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+
+    <script>
+      // Bare minimum - prevent white flash
+      (function () {
+        const theme = localStorage.getItem("theme") || "dark";
+        document.documentElement.setAttribute("data-theme", theme);
+        if (!localStorage.getItem("theme"))
+          localStorage.setItem("theme", theme);
+      })();
+    </script>
   </head>
   <body>
     <header class="main-header">
@@ -66,7 +76,12 @@ import "../styles/global.css";
           </p>
 
           <div class="footer-badges">
-            <span class="footer-badge">💻 GitHub Repository </span>
+            <a
+              href="https://github.com/justthatrandomcoder/ag-x0000"
+              target="_blank"
+              class="footer-badge github-link"
+              >💻 GitHub Repository
+            </a>
             <span class="footer-badge">📚 Bildungszwecke </span>
             <span class="footer-badge footer-badge-secondary">
               🇬🇷 Antikes Griechenland
@@ -79,16 +94,18 @@ import "../styles/global.css";
 </html>
 
 <script>
-  // Initialize theme immediately to prevent flash
-  (function () {
-    const savedTheme = localStorage.getItem("theme");
-    const theme = savedTheme || "dark";
-    document.documentElement.setAttribute("data-theme", theme);
+  function updateLogo() {
+    const logoImage = document.querySelector(".logo-image");
+    const currentTheme = document.documentElement.getAttribute("data-theme");
 
-    if (!savedTheme) {
-      localStorage.setItem("theme", theme);
+    if (logoImage) {
+      if (currentTheme === "dark") {
+        logoImage.src = "/logo_white.png";
+      } else {
+        logoImage.src = "/logo.png";
+      }
     }
-  })();
+  }
 
   function toggleTheme() {
     const currentTheme = document.documentElement.getAttribute("data-theme");
@@ -98,6 +115,7 @@ import "../styles/global.css";
     localStorage.setItem("theme", newTheme);
 
     updateThemeSlider();
+    updateLogo();
   }
 
   function updateThemeSlider() {
@@ -109,10 +127,15 @@ import "../styles/global.css";
     }
   }
 
-  // Initialize slider and event listener when DOM is ready
+  // Initialize everything when DOM is ready
   document.addEventListener("DOMContentLoaded", () => {
+    // Set correct logo based on current theme
+    updateLogo();
+
+    // Initialize theme slider
     updateThemeSlider();
 
+    // Set up theme toggle listener
     const themeToggle = document.getElementById("theme-toggle");
     if (themeToggle) {
       themeToggle.addEventListener("change", toggleTheme);

@@ -548,8 +548,13 @@ input:checked+.slider::after {
     transform: translateY(-2px);
 }
 
+:root[data-theme="dark"] .cta-primary {
+    color: var(--text-100);
+    background: var(--primary-500);
+}
+
 :root[data-theme="dark"] .cta-primary:hover {
-    background: var(--primary-300);
+    background: var(--primary-600);
 }
 
 .cta-secondary {
@@ -572,7 +577,7 @@ input:checked+.slider::after {
 }
 
 :root[data-theme="dark"] .cta-secondary {
-    color: var(--text-200);
+    color: var(--text-600);
     border-color: var(--text-600);
 }
 
@@ -824,6 +829,16 @@ input:checked+.slider::after {
     border-color: var(--primary);
     color: var(--primary);
     background: var(--background-50);
+}
+
+
+:root[data-theme="dark"] .guide-btn.primary {
+    color: var(--text-100);
+    background: var(--background-600);
+}
+
+:root[data-theme="dark"] .guide-btn.primary:hover {
+    background: var(--background-700);
 }
 
 :root[data-theme="dark"] .guide-btn.secondary {
@@ -1101,7 +1116,7 @@ input:checked+.slider::after {
 }
 
 :root[data-theme="dark"] .content-text {
-    color: var(--text-300);
+    color: var(--text-500);
 }
 
 .station-navigation {
@@ -1238,7 +1253,7 @@ input:checked+.slider::after {
 }
 
 :root[data-theme="dark"] .footer-title {
-    color: var(--text-800);
+    color: var(--text-500) !important;
 }
 
 .footer-description {
@@ -1284,7 +1299,7 @@ input:checked+.slider::after {
 
 .footer-badge {
     background: var(--primary-100);
-    color: var(--primary-700);
+    color: var(--text-500);
     padding: 0.25rem 0.75rem;
     border-radius: 12px;
     font-size: 0.75rem;
@@ -1294,17 +1309,25 @@ input:checked+.slider::after {
 
 :root[data-theme="dark"] .footer-badge {
     background: var(--background-100);
-    color: var(--text-800);
+    color: var(--text-500);
+}
+
+.github-link {
+    color: var(--text-700) !important;
+}
+
+.github-link:hover {
+    color: var(--text-900) !important;
 }
 
 .footer-badge-secondary {
     background: var(--text-100);
-    color: var(--text-800);
+    color: var(--text-500);
 }
 
 :root[data-theme="dark"] .footer-badge-secondary {
     background: var(--background-100);
-    color: var(--text-800);
+    color: var(--text-500);
 }
 
 /* ==========================================
