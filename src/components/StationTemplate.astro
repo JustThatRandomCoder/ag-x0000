@@ -2,13 +2,20 @@
 export interface Props {
   stationNumber: number;
   title: string;
+  shortDescription: string;
   description: string;
   audioFile: string;
   locationInfo: string;
 }
 
-const { stationNumber, title, description, audioFile, locationInfo } =
-  Astro.props;
+const {
+  stationNumber,
+  title,
+  shortDescription,
+  description,
+  audioFile,
+  locationInfo,
+} = Astro.props;
 
 import Layout from "./Layout.astro";
 import AudioPlayer from "./AudioPlayer.astro";
@@ -18,7 +25,7 @@ const nextStation = getNextStation(stationNumber);
 const previousStation = getPreviousStation(stationNumber);
 ---
 
-<Layout title={title} description={description}>
+<Layout title={title} description={shortDescription}>
   <main class="station-page">
     <div class="container">
       <!-- Station Header -->
@@ -34,7 +41,7 @@ const previousStation = getPreviousStation(stationNumber);
           <h1 class="station-title-left">
             {title.replace(`Station ${stationNumber}: `, "")}
           </h1>
-          <p class="station-description">{description}</p>
+          <p class="station-description">{shortDescription}</p>
         </div>
       </header>
 

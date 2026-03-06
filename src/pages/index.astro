@@ -100,7 +100,12 @@ import { agoraStations } from "../routes/router.ts";
             <a href={station.path} class="station-card">
               <div class="station-header">
                 <div class="station-number">{station.stationNumber}</div>
-                <div class="station-duration">~3:45 Min</div>
+                <div
+                  class="station-duration"
+                  data-audio-src={station.audioFile}
+                >
+                  ~--:-- Min
+                </div>
               </div>
               <h3 class="station-name">
                 {station.title.replace(
@@ -108,7 +113,7 @@ import { agoraStations } from "../routes/router.ts";
                   "",
                 )}
               </h3>
-              <p class="station-description">{station.description}</p>
+              <p class="station-description">{station.shortDescription}</p>
               <div class="station-action">Anhören →</div>
             </a>
           ))
@@ -131,3 +136,40 @@ import { agoraStations } from "../routes/router.ts";
     </div>
   </section>
 </Layout>
+
+<script>
+  // Audio-Dauern dynamisch laden
+  document.addEventListener("DOMContentLoaded", function () {
+    const durationElements = document.querySelectorAll(
+      ".station-duration[data-audio-src]",
+    );
+
+    durationElements.forEach(async (element) => {
+      const audioSrc = element.getAttribute("data-audio-src");
+
+      try {
+        const audio = new Audio(audioSrc);
+
+        // Warten auf Metadaten
+        await new Promise((resolve, reject) => {
+          audio.addEventListener("loadedmetadata", resolve);
+          audio.addEventListener("error", reject);
+          audio.preload = "metadata";
+          audio.load();
+        });
+
+        // Dauer formatieren und anzeigen
+        const duration = audio.duration;
+        const minutes = Math.floor(duration / 60);
+        const seconds = Math.floor(duration % 60);
+        const formattedDuration = `${minutes}:${seconds.toString().padStart(2, "0")} Min`;
+
+        element.textContent = formattedDuration;
+      } catch (error) {
+        // Fallback bei Fehlern
+        element.textContent = "~3:30 Min";
+        console.warn(`Konnte Audio-Dauer für ${audioSrc} nicht laden:`, error);
+      }
+    });
+  });
+</script>
