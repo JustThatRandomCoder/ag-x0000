@@ -22,16 +22,16 @@ export const agoraStations: Route[] = [
   {
     path: '/station-2', 
     component: 'station-2',
-    title: 'Station 2: Stoa der Giganten',
-    description: 'Die imposante Säulenhalle der mythischen Riesen',
+    title: 'Station 2: Stoa des Attalos',
+    description: 'Die rekonstruierte hellenistische Säulenhalle und Museum',
     stationNumber: 2,
     audioFile: '/audios/station-02.mp3'
   },
   {
     path: '/station-3',
     component: 'station-3', 
-    title: 'Station 3: Attalos-Stoa',
-    description: 'Die restaurierte hellenistische Säulenhalle des Königs Attalos II',
+    title: 'Station 3: Tempel des Hephaistos',
+    description: 'Der besterhaltene dorische Tempel in Griechenland',
     stationNumber: 3,
     audioFile: '/audios/station-03.mp3'
   },
