@@ -391,6 +391,7 @@ input:checked+.slider::after {
     min-height: 60vh;
     display: flex;
     align-items: center;
+    position: relative;
 }
 
 :root[data-theme="dark"] .hero-section {
@@ -589,6 +590,7 @@ input:checked+.slider::after {
 
 .cta-icon {
     font-size: 1.25rem;
+    margin-right: 0.5rem;
 }
 
 /* Info Section with Box */
