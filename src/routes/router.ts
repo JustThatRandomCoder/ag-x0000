@@ -1,5 +1,5 @@
 // Router Configuration für Agora-Audioführung
-// Alle 15 Stationen der Agora werden hier definiert
+// Alle 14 Stationen der Agora werden hier definiert
 
 export interface Route {
   path: string;
@@ -87,65 +87,56 @@ export const agoraStations: Route[] = [
   {
     path: '/station-9',
     component: 'station-9',
-    title: 'Station 9: Hephaisteion',
-    shortDescription: 'Besterhaltener Tempel des Schmiedegottes',
-    description: 'Der besterhaltene griechische Tempel des Schmiedegottes',
+    title: 'Station 9: Hellenistisches Arsenal',
+    shortDescription: 'Hellenistisches Arsenal der Agora',
+    description: 'Das Hellenistische Arsenal der Agora',
     stationNumber: 9,
     audioFile: '/audios/station-09.mp3'
   },
   {
     path: '/station-10',
     component: 'station-10',
-    title: 'Station 10: Hellenistisches Gebäude',
-    shortDescription: 'Architektur der hellenistischen Epoche',
-    description: 'Architektur der hellenistischen Epoche in der Agora',
+    title: 'Station 10: Tempel des Apollo Patroos',
+    shortDescription: 'Tempel des Stammvaters der Athener',
+    description: 'Der Tempel des Apollo Patroos',
     stationNumber: 10,
     audioFile: '/audios/station-10.mp3'
   },
   {
     path: '/station-11',
     component: 'station-11',
-    title: 'Station 11: Tempel des Apollon Patroos',
-    shortDescription: 'Tempel des Stammvaters der Athener',
-    description: 'Der Tempel des Stammvaters der Athener',
+    title: 'Station 11: Tempel des Ares',
+    shortDescription: 'Dem Kriegsgott geweihter Tempel',
+    description: 'Der Tempel des Ares in der Agora',
     stationNumber: 11,
     audioFile: '/audios/station-11.mp3'
   },
   {
     path: '/station-12',
     component: 'station-12',
-    title: 'Station 12: Tempel und Altar des Ares',
-    shortDescription: 'Dem Kriegsgott geweihter Tempelkomplex',
-    description: 'Dem Kriegsgott geweihter Tempelkomplex',
+    title: 'Station 12: Stoa des Zeus Eleutherios',
+    shortDescription: 'Säulenhalle des Zeus des Befreiers',
+    description: 'Die Stoa des Zeus Eleutherios',
     stationNumber: 12,
     audioFile: '/audios/station-12.mp3'
   },
   {
     path: '/station-13',
     component: 'station-13',
-    title: 'Station 13: Stoa des Zeus Eleutherios',
-    shortDescription: 'Säulenhalle des Zeus des Befreiers',
-    description: 'Die Säulenhalle des Zeus des Befreiers',
+    title: 'Station 13: Altar der zwölf Götter',
+    shortDescription: 'Religiöses Zentrum und Nullpunkt Athens',
+    description: 'Der Altar der zwölf Götter',
     stationNumber: 13,
     audioFile: '/audios/station-13.mp3'
   },
   {
     path: '/station-14',
     component: 'station-14',
-    title: 'Station 14: Altar der zwölf Götter',
-    shortDescription: 'Religiöses Zentrum und Nullpunkt Athens',
-    description: 'Das religiöse Zentrum und Nullpunkt des antiken Athens',
-    stationNumber: 14,
-    audioFile: '/audios/station-14.mp3'
-  },
-  {
-    path: '/station-15',
-    component: 'station-15',
-    title: 'Station 15: Hagioi Apostoloi',
+    title: 'Station 14: Hagioi Apostoloi',
     shortDescription: 'Byzantinische Kirche der Heiligen Apostel',
     description: 'Die byzantinische Kirche der Heiligen Apostel',
-    stationNumber: 15,
-    audioFile: '/audios/station-15.mp3'
+    stationNumber: 14,
+    audioFile: '/audios/station-14.mp3'
   }
 ];
 
