@@ -7,9 +7,9 @@
   --text: #1a1a1a;
   --text-muted: #525252;
   --border: #dfddd5;
-  --accent: #5ec9ff;
-  --accent-strong: #2fb3f5;
-  --accent-soft: #e5f6ff;
+  --accent: #4ea6c4;
+  --accent-strong: #3a8fae;
+  --accent-soft: #e4f1f6;
   --shadow: 0 1.2rem 2.8rem rgba(20, 20, 20, 0.1);
 }
 
@@ -20,9 +20,9 @@
   --text: #f4f4f1;
   --text-muted: #b3b3ae;
   --border: #262626;
-  --accent: #63d4ff;
-  --accent-strong: #33c3ff;
-  --accent-soft: #10202a;
+  --accent: #4e9ab8;
+  --accent-strong: #3d7f99;
+  --accent-soft: #142028;
   --shadow: 0 1.2rem 2.8rem rgba(0, 0, 0, 0.55);
 }
 
@@ -146,6 +146,9 @@ main {
 }
 
 .theme-slider-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-inline-start: 0.1rem;
 }
 
@@ -154,6 +157,8 @@ main {
   inline-size: 3rem;
   block-size: 1.7rem;
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .theme-slider input {
@@ -272,6 +277,7 @@ input:checked + .slider::after {
   border: 0.0625rem solid var(--border);
   border-radius: 1rem;
   padding: 1rem;
+  margin-block-start: 1rem;
 }
 
 .quick-guide h3,
