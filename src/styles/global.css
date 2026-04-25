@@ -7,9 +7,9 @@
   --text: #1a1a1a;
   --text-muted: #525252;
   --border: #dfddd5;
-  --accent: #4ea6c4;
-  --accent-strong: #3a8fae;
-  --accent-soft: #e4f1f6;
+  --accent: #bf9b5f;
+  --accent-strong: #9a7942;
+  --accent-soft: #f4ebda;
   --shadow: 0 1.2rem 2.8rem rgba(20, 20, 20, 0.1);
 }
 
@@ -20,9 +20,9 @@
   --text: #f4f4f1;
   --text-muted: #b3b3ae;
   --border: #262626;
-  --accent: #4e9ab8;
-  --accent-strong: #3d7f99;
-  --accent-soft: #142028;
+  --accent: #d3af72;
+  --accent-strong: #e8c98e;
+  --accent-soft: #2d2518;
   --shadow: 0 1.2rem 2.8rem rgba(0, 0, 0, 0.55);
 }
 
@@ -150,6 +150,7 @@ main {
   align-items: center;
   justify-content: center;
   margin-inline-start: 0.1rem;
+  margin-inline-end: 0.35rem;
 }
 
 .theme-slider {
