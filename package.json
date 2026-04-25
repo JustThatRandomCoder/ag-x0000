@@ -6,10 +6,12 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "start": "node server.mjs",
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.17.1"
+    "@fontsource-variable/sora": "5.2.8",
+    "astro": "5.18.0"
   },
   "packageManager": "pnpm@10.33.0"
 }
