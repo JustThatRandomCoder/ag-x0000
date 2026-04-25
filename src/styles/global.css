@@ -142,7 +142,7 @@ main {
 
 .tour-start:hover {
   color: #031018;
-  background: linear-gradient(135deg, #8ce0ff, var(--accent-strong));
+  background: linear-gradient(135deg, var(--accent-strong), #f0d5a2);
 }
 
 .theme-slider-container {
@@ -185,7 +185,7 @@ main {
   inset-inline-start: 0.12rem;
   inline-size: 1.3rem;
   block-size: 1.3rem;
-  background: linear-gradient(145deg, #d7f3ff, #5bc8ff);
+  background: linear-gradient(145deg, #f8f3e8, #d8b579);
   border-radius: 50%;
   transition: transform 0.2s ease;
 }
