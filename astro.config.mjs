@@ -5,10 +5,10 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
   vite: {
     server: {
-      allowedHosts: ['ag.x0000.de'],
+      allowedHosts: true,
     },
     preview: {
-      allowedHosts: ['ag.x0000.de'],
+      allowedHosts: true,
     },
   },
 });
