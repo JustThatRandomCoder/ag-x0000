@@ -7,9 +7,9 @@
   --text: #1a1a1a;
   --text-muted: #525252;
   --border: #dfddd5;
-  --accent: #bf9b5f;
-  --accent-strong: #9a7942;
-  --accent-soft: #f4ebda;
+  --accent: #5ec9ff;
+  --accent-strong: #2fb3f5;
+  --accent-soft: #e5f6ff;
   --shadow: 0 1.2rem 2.8rem rgba(20, 20, 20, 0.1);
 }
 
@@ -20,9 +20,9 @@
   --text: #f4f4f1;
   --text-muted: #b3b3ae;
   --border: #262626;
-  --accent: #d3af72;
-  --accent-strong: #e8c98e;
-  --accent-soft: #2d2518;
+  --accent: #63d4ff;
+  --accent-strong: #33c3ff;
+  --accent-soft: #10202a;
   --shadow: 0 1.2rem 2.8rem rgba(0, 0, 0, 0.55);
 }
 
@@ -92,7 +92,7 @@ main {
 
 .header-title {
   font-size: 1.08rem;
-  font-weight: 700;
+  font-weight: 620;
   letter-spacing: 0.01em;
 }
 
@@ -136,13 +136,13 @@ main {
 
 .tour-start {
   background: linear-gradient(135deg, var(--accent), var(--accent-strong));
-  color: #141414;
-  font-weight: 700;
+  color: #041017;
+  font-weight: 600;
 }
 
 .tour-start:hover {
-  color: #0f0f0f;
-  background: linear-gradient(135deg, var(--accent-strong), #f0d5a2);
+  color: #031018;
+  background: linear-gradient(135deg, #8ce0ff, var(--accent-strong));
 }
 
 .theme-slider-container {
@@ -179,7 +179,7 @@ main {
   inset-inline-start: 0.12rem;
   inline-size: 1.3rem;
   block-size: 1.3rem;
-  background: linear-gradient(145deg, #f8f3e8, #d8b579);
+  background: linear-gradient(145deg, #d7f3ff, #5bc8ff);
   border-radius: 50%;
   transition: transform 0.2s ease;
 }
@@ -211,7 +211,7 @@ input:checked + .slider::after {
   color: var(--accent-strong);
   border-radius: 999rem;
   font-size: 0.78rem;
-  font-weight: 700;
+  font-weight: 600;
   padding: 0.32rem 0.82rem;
 }
 
@@ -235,8 +235,7 @@ input:checked + .slider::after {
 }
 
 .important-note,
-.navigation-hint,
-.quick-guide {
+.navigation-hint {
   display: grid;
   grid-template-columns: 0.25rem 1fr;
   gap: 0.8rem;
@@ -266,6 +265,25 @@ input:checked + .slider::after {
   line-height: 1.72;
 }
 
+.quick-guide {
+  display: grid;
+  gap: 0.7rem;
+  background: var(--bg-muted);
+  border: 0.0625rem solid var(--border);
+  border-radius: 1rem;
+  padding: 1rem;
+}
+
+.quick-guide h3,
+.quick-guide p {
+  margin: 0;
+}
+
+.quick-guide p {
+  color: var(--text-muted);
+  line-height: 1.72;
+}
+
 .accent-bar {
   background: linear-gradient(180deg, var(--accent), transparent);
   border-radius: 999rem;
@@ -288,7 +306,7 @@ input:checked + .slider::after {
 .stat-number {
   display: block;
   font-size: 1.12rem;
-  font-weight: 700;
+  font-weight: 620;
 }
 
 .stat-label {
@@ -319,8 +337,9 @@ input:checked + .slider::after {
 .cta-primary,
 .guide-btn.primary {
   background: linear-gradient(135deg, var(--accent), var(--accent-strong));
-  color: #111111;
+  color: #031018;
   border-color: transparent;
+  font-weight: 600;
 }
 
 .cta-secondary,
@@ -342,6 +361,7 @@ input:checked + .slider::after {
   margin: 0;
   font-size: 1.95rem;
   line-height: 1.2;
+  font-weight: 620;
 }
 
 .stations-grid {
@@ -390,6 +410,7 @@ input:checked + .slider::after {
 .station-name {
   margin: 0;
   font-size: 1rem;
+  font-weight: 560;
 }
 
 .station-description {
@@ -402,7 +423,7 @@ input:checked + .slider::after {
 .station-action {
   color: var(--accent-strong);
   font-size: 0.82rem;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .station-page {
@@ -424,6 +445,7 @@ input:checked + .slider::after {
   margin: 0.45rem 0 0.6rem;
   font-size: clamp(1.8rem, 4vw, 2.3rem);
   line-height: 1.2;
+  font-weight: 620;
 }
 
 .audio-section,
@@ -568,7 +590,7 @@ input:checked + .slider::after {
 
 .nav-title {
   font-size: 0.86rem;
-  font-weight: 600;
+  font-weight: 560;
 }
 
 .site-footer {
@@ -589,6 +611,7 @@ input:checked + .slider::after {
 
 .footer-title {
   margin: 0;
+  font-weight: 620;
 }
 
 .footer-description,
@@ -647,13 +670,35 @@ input:checked + .slider::after {
     width: min(74rem, calc(100% - 1rem));
   }
 
+  .header-nav {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.45rem;
+    border-radius: 0.95rem;
+  }
+
+  .nav-links {
+    width: 100%;
+    overflow: visible;
+    justify-content: space-between;
+    gap: 0.25rem;
+  }
+
+  .header-tools {
+    border-inline-start: 0;
+    border-top: 0.0625rem solid var(--border);
+    padding-inline-start: 0;
+    padding-top: 0.45rem;
+    justify-content: flex-end;
+  }
+
   .header-title {
     font-size: 0.95rem;
   }
 
   .nav-link {
     font-size: 0.82rem;
-    padding: 0.48rem 0.74rem;
+    padding: 0.5rem 0.68rem;
     white-space: nowrap;
   }
 
