@@ -17,7 +17,6 @@ const { audioSrc, title, duration = "00:00", className = "" } = Astro.props;
 
   <audio class="audio-element" preload="metadata">
     <source src={audioSrc} type="audio/mpeg" />
-    <source src={audioSrc.replace(".mp3", ".ogg")} type="audio/ogg" />
     Ihr Browser unterstützt das Audio-Element nicht.
   </audio>
 
