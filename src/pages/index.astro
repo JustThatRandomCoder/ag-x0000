@@ -166,6 +166,11 @@ import { agoraStations } from "../routes/router.ts";
 
         // Dauer formatieren und anzeigen
         const duration = audio.duration;
+
+        if (!Number.isFinite(duration) || duration <= 0) {
+          throw new Error("Ungültige Audio-Dauer");
+        }
+
         const minutes = Math.floor(duration / 60);
         const seconds = Math.floor(duration % 60);
         const formattedDuration = `${minutes}:${seconds.toString().padStart(2, "0")} Min`;
