@@ -15,8 +15,7 @@ const { audioSrc, title, duration = "00:00", className = "" } = Astro.props;
     <span class="audio-duration">{duration}</span>
   </div>
 
-  <audio class="audio-element" preload="metadata">
-    <source src={audioSrc} type="audio/mpeg" />
+  <audio class="audio-element" preload="metadata" playsinline src={audioSrc}>
     Ihr Browser unterstützt das Audio-Element nicht.
   </audio>
 
@@ -240,6 +239,21 @@ const { audioSrc, title, duration = "00:00", className = "" } = Astro.props;
       const totalTimeSpan = playerContainer.querySelector(".total-time");
       const audioDurationLabel = playerContainer.querySelector(".audio-duration");
 
+      if (
+        !audio ||
+        !playPauseBtn ||
+        !playIcon ||
+        !pauseIcon ||
+        !rewindBtn ||
+        !forwardBtn ||
+        !progressRange ||
+        !currentTimeSpan ||
+        !totalTimeSpan ||
+        !audioDurationLabel
+      ) {
+        return;
+      }
+
       let isSeeking = false;
 
       function formatTime(seconds) {
@@ -260,11 +274,35 @@ const { audioSrc, title, duration = "00:00", className = "" } = Astro.props;
         progressRange.style.setProperty("--progress", `${safe}%`);
       }
 
-      audio.addEventListener("loadedmetadata", function () {
+      function syncDuration() {
+        if (!Number.isFinite(audio.duration) || audio.duration <= 0) {
+          return;
+        }
         const formatted = formatTime(audio.duration);
         totalTimeSpan.textContent = formatted;
         audioDurationLabel.textContent = formatted;
+      }
+
+      function clearErrorState() {
+        if (audioDurationLabel.textContent === "Fehler") {
+          audioDurationLabel.textContent = "--:--";
+        }
+      }
+
+      function commitSeek() {
+        if (Number.isFinite(audio.duration) && audio.duration > 0) {
+          audio.currentTime = (Number(progressRange.value) / 100) * audio.duration;
+        }
+        isSeeking = false;
+      }
+
+      audio.addEventListener("loadedmetadata", function () {
+        clearErrorState();
+        syncDuration();
       });
+      audio.addEventListener("durationchange", syncDuration);
+      audio.addEventListener("loadeddata", syncDuration);
+      audio.addEventListener("canplay", syncDuration);
 
       audio.addEventListener("timeupdate", function () {
         if (!isSeeking && Number.isFinite(audio.duration) && audio.duration > 0) {
@@ -305,15 +343,29 @@ const { audioSrc, title, duration = "00:00", className = "" } = Astro.props;
         }
       });
 
-      progressRange.addEventListener("change", function () {
-        if (Number.isFinite(audio.duration) && audio.duration > 0) {
-          audio.currentTime = (Number(progressRange.value) / 100) * audio.duration;
+      progressRange.addEventListener("change", commitSeek);
+      progressRange.addEventListener("pointerdown", function () {
+        isSeeking = true;
+      });
+      progressRange.addEventListener("pointerup", commitSeek);
+      progressRange.addEventListener("touchend", commitSeek);
+      progressRange.addEventListener("keyup", function (event) {
+        if (
+          event.key === "ArrowLeft" ||
+          event.key === "ArrowRight" ||
+          event.key === "Home" ||
+          event.key === "End"
+        ) {
+          commitSeek();
         }
-        isSeeking = false;
       });
 
-      progressRange.addEventListener("pointerup", function () {
-        isSeeking = false;
+      audio.addEventListener("play", function () {
+        setPlayingState(true);
+      });
+
+      audio.addEventListener("pause", function () {
+        setPlayingState(false);
       });
 
       audio.addEventListener("ended", function () {
@@ -322,8 +374,18 @@ const { audioSrc, title, duration = "00:00", className = "" } = Astro.props;
         currentTimeSpan.textContent = "0:00";
       });
 
+      audio.addEventListener("error", function () {
+        audioDurationLabel.textContent = "Fehler";
+        totalTimeSpan.textContent = "--:--";
+        currentTimeSpan.textContent = "0:00";
+        setPlayingState(false);
+      });
+
       setPlayingState(false);
       setProgress(0);
+      if (audio.readyState >= 1) {
+        syncDuration();
+      }
     });
   });
 </script>

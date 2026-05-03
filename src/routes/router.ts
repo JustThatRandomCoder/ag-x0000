@@ -1,5 +1,5 @@
 // Router Configuration für Agora-Audioführung
-// Alle 14 Stationen der Agora werden hier definiert
+// Alle 15 Stationen der Agora werden hier definiert
 
 export interface Route {
   path: string;
@@ -132,11 +132,20 @@ export const agoraStations: Route[] = [
   {
     path: '/station-14',
     component: 'station-14',
-    title: 'Station 14: Hagioi Apostoloi',
-    shortDescription: 'Byzantinische Kirche der Heiligen Apostel',
-    description: 'Die byzantinische Kirche der Heiligen Apostel',
+    title: 'Station 14: Sokrates',
+    shortDescription: 'Philosophisches Erbe des berühmten Denkers',
+    description: 'Sokrates und sein Einfluss auf die Philosophie Athens',
     stationNumber: 14,
     audioFile: '/audios/station-14.mp3'
+  },
+  {
+    path: '/station-15',
+    component: 'station-15',
+    title: 'Station 15: Hagioi Apostoloi',
+    shortDescription: 'Byzantinische Kirche der Heiligen Apostel',
+    description: 'Die byzantinische Kirche der Heiligen Apostel',
+    stationNumber: 15,
+    audioFile: '/audios/station-15.mp3'
   }
 ];
 

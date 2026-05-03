@@ -43,7 +43,7 @@ import { agoraStations } from "../routes/router.ts";
               <span class="stat-label">Stationen</span>
             </div>
             <div class="stat">
-              <span class="stat-number">~45</span>
+              <span class="stat-number" id="total-duration-minutes">--</span>
               <span class="stat-label">Minuten</span>
             </div>
             <div class="stat">
@@ -144,27 +144,67 @@ import { agoraStations } from "../routes/router.ts";
 </Layout>
 
 <script>
-  // Audio-Dauern dynamisch laden
+  // Audio-Dauern und Gesamtdauer dynamisch laden
   document.addEventListener("DOMContentLoaded", function () {
-    const durationElements = document.querySelectorAll(
+    const durationElements = Array.from(document.querySelectorAll(
       ".station-duration[data-audio-src]",
-    );
+    ));
+    const totalDurationElement = document.getElementById("total-duration-minutes");
+    let totalDurationSeconds = 0;
 
-    durationElements.forEach(async (element) => {
+    const resolveAudioSrc = (audioSrc) => {
+      try {
+        return new URL(audioSrc, window.location.origin).toString();
+      } catch {
+        return audioSrc;
+      }
+    };
+
+    const loadDuration = async (element) => {
       const audioSrc = element.getAttribute("data-audio-src");
 
       try {
-        const audio = new Audio(audioSrc);
+        if (!audioSrc) {
+          throw new Error("Audio-Quelle fehlt");
+        }
 
-        // Warten auf Metadaten
+        const audio = new Audio(resolveAudioSrc(audioSrc));
+
         await new Promise((resolve, reject) => {
-          audio.addEventListener("loadedmetadata", resolve);
-          audio.addEventListener("error", reject);
+          const timeoutId = window.setTimeout(() => {
+            reject(new Error("Timeout beim Laden der Audio-Metadaten"));
+          }, 30000);
+
+          const cleanup = () => {
+            window.clearTimeout(timeoutId);
+            audio.removeEventListener("loadedmetadata", onLoad);
+            audio.removeEventListener("durationchange", onLoad);
+            audio.removeEventListener("loadeddata", onLoad);
+            audio.removeEventListener("canplay", onLoad);
+            audio.removeEventListener("error", onError);
+          };
+
+          const onLoad = () => {
+            cleanup();
+            resolve(undefined);
+          };
+
+          const onError = () => {
+            cleanup();
+            reject(new Error("Audio-Metadaten konnten nicht geladen werden"));
+          };
+
+          audio.addEventListener("loadedmetadata", onLoad);
+          audio.addEventListener("durationchange", onLoad);
+          audio.addEventListener("loadeddata", onLoad);
+          audio.addEventListener("canplay", onLoad);
+          audio.addEventListener("error", onError);
           audio.preload = "metadata";
-          audio.load();
+          if (audio.readyState >= 1) {
+            onLoad();
+          }
         });
 
-        // Dauer formatieren und anzeigen
         const duration = audio.duration;
 
         if (!Number.isFinite(duration) || duration <= 0) {
@@ -176,11 +216,36 @@ import { agoraStations } from "../routes/router.ts";
         const formattedDuration = `${minutes}:${seconds.toString().padStart(2, "0")} Min`;
 
         element.textContent = formattedDuration;
+        totalDurationSeconds += duration;
       } catch (error) {
-        // Fallback bei Fehlern
-        element.textContent = "~3:30 Min";
+        element.textContent = "--:-- Min";
         console.warn(`Konnte Audio-Dauer für ${audioSrc} nicht laden:`, error);
       }
+    };
+
+    const queue = [...durationElements];
+    const workers = Array.from({ length: Math.min(3, queue.length) }, async () => {
+      while (queue.length > 0) {
+        const element = queue.shift();
+        if (element) {
+          await loadDuration(element);
+        }
+      }
+    });
+
+    Promise.all(workers).then(() => {
+      if (!totalDurationElement) {
+        return;
+      }
+
+      if (totalDurationSeconds > 0) {
+        totalDurationElement.textContent = String(
+          Math.round(totalDurationSeconds / 60),
+        );
+        return;
+      }
+
+      totalDurationElement.textContent = "--";
     });
   });
 </script>

@@ -27,6 +27,39 @@ const contentTypes = {
   '.woff2': 'font/woff2',
 };
 
+function parseRangeHeader(rangeHeader, fileSize) {
+  if (!rangeHeader || !rangeHeader.startsWith('bytes=')) {
+    return null;
+  }
+
+  const [startRaw, endRaw] = rangeHeader.replace('bytes=', '').split('-');
+  const parsedStart = Number.parseInt(startRaw ?? '', 10);
+  const parsedEnd = Number.parseInt(endRaw ?? '', 10);
+
+  let start = Number.isFinite(parsedStart) ? parsedStart : NaN;
+  let end = Number.isFinite(parsedEnd) ? parsedEnd : NaN;
+
+  if (Number.isNaN(start) && !Number.isNaN(end)) {
+    const suffixLength = end;
+    if (suffixLength <= 0) {
+      return null;
+    }
+    start = Math.max(0, fileSize - suffixLength);
+    end = fileSize - 1;
+  } else {
+    if (Number.isNaN(start) || start < 0 || start >= fileSize) {
+      return null;
+    }
+    end = Number.isNaN(end) ? fileSize - 1 : Math.min(end, fileSize - 1);
+  }
+
+  if (end < start) {
+    return null;
+  }
+
+  return { start, end };
+}
+
 function withSecurityHeaders(res) {
   res.setHeader('X-Content-Type-Options', 'nosniff');
   res.setHeader('X-Frame-Options', 'SAMEORIGIN');
@@ -123,13 +156,51 @@ const server = http.createServer(async (req, res) => {
     res.end(JSON.stringify({ error: 'Not Found', code: 'NOT_FOUND' }));
     return;
   }
+  const fileStats = await stat(filePath);
+  const fileSize = fileStats.size;
+  const contentType = getContentType(filePath);
+  const isAudioFile = contentType.startsWith('audio/');
+  const rangeHeader = req.headers.range;
+
+  res.setHeader('Content-Type', contentType);
+  res.setHeader('Accept-Ranges', 'bytes');
+
+  if (isAudioFile && rangeHeader) {
+    const parsedRange = parseRangeHeader(rangeHeader, fileSize);
+
+    if (!parsedRange) {
+      res.statusCode = 416;
+      res.setHeader('Content-Range', `bytes */${fileSize}`);
+      res.setHeader('Content-Type', 'application/json; charset=utf-8');
+      res.end(JSON.stringify({ error: 'Requested Range Not Satisfiable', code: 'RANGE_NOT_SATISFIABLE' }));
+      return;
+    }
+
+    const { start, end } = parsedRange;
+    const chunkSize = end - start + 1;
+
+    res.statusCode = 206;
+    res.setHeader('Content-Range', `bytes ${start}-${end}/${fileSize}`);
+    res.setHeader('Content-Length', String(chunkSize));
+
+    createReadStream(filePath, { start, end }).pipe(res).on('error', () => {
+      if (!res.headersSent) {
+        res.statusCode = 500;
+        res.setHeader('Content-Type', 'application/json; charset=utf-8');
+      }
+      res.end(JSON.stringify({ error: 'Internal Server Error', code: 'INTERNAL_SERVER_ERROR' }));
+    });
+    return;
+  }
 
   res.statusCode = 200;
-  res.setHeader('Content-Type', getContentType(filePath));
+  res.setHeader('Content-Length', String(fileSize));
 
   createReadStream(filePath).pipe(res).on('error', () => {
-    res.statusCode = 500;
-    res.setHeader('Content-Type', 'application/json; charset=utf-8');
+    if (!res.headersSent) {
+      res.statusCode = 500;
+      res.setHeader('Content-Type', 'application/json; charset=utf-8');
+    }
     res.end(JSON.stringify({ error: 'Internal Server Error', code: 'INTERNAL_SERVER_ERROR' }));
   });
 });
