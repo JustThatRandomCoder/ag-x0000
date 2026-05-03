@@ -774,6 +774,10 @@ input:checked + .slider::after {
     white-space: nowrap;
   }
 
+  .nav-link-stations {
+    display: none;
+  }
+
   .theme-slider {
     inline-size: 3rem;
     block-size: 1.7rem;
